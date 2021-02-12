@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <style>
+        #input_word{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+        #cheerup{
+            resize: both;
+            width: 1600px;
+            height: 750px;
+            opacity: 0.5;
+        }
+    </style>
+    
+    <script>
+
+        function send(){
+            form = document.getElementById("send_letter").value;
+            text = document.getElementById("write_text").value;
+            txt = text.replace(/[\{\}\[\]\/?.,;:|\)\s*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi, "");
+
+            }
+            
+            function check(){
+                if (txt.length<30){
+                    alert("30자 이상 써주세요. (공백, 특수문자제외)");
+                    return false;}
+                if(txt.length>=30){
+                    form.submit();
+                    return true;
+                }
+                }
+    </script>
+</head>
+<body>
+    <div id='div'>
+        <img src="{{url_for('static', filename='image/maple.jpg')}}" id="cheerup">
+    </div>
+    <div id="input_word">
+    <form action="http://localhost:5000/answer" id="send_letter" method="POST" onsubmit="return check()">
+        <textarea name="letter" id="write_text" cols="175" rows="15"></textarea>
+        <button type="input" class="btn btn-secondary" onclick="send()">전송</button>
+    </form>
+    </div>
+        
+</body>
+</html>
